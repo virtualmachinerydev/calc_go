@@ -130,7 +130,7 @@ func Calc(expression string) (float64, error) {
 			/////////////////////////////////////////////////////////////////////////////////////////////
 		case value == 's':
 		default:
-			return 0, fmt.Errorf("Not correct input")
+			return 0, fmt.Errorf("Incorrect input")
 		}
 	}
 	return res, nil

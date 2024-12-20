@@ -58,7 +58,7 @@ func (a *Application) Run() error {
 		//вычисляем выражение
 		result, err := calculation.Calc(text)
 		if err != nil {
-			log.Println(text, " calculation failed wit error: ", err)
+			log.Println(text, " calculation failed with error: ", err)
 		} else {
 			log.Println(text, "=", result)
 		}
@@ -80,10 +80,10 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 
 	result, err := calculation.Calc(request.Expression)
 	if err != nil {
-		if errors.Is(err, calculation.ErrInvalidExpression) {
-			fmt.Fprintf(w, "err: %s", err.Error())
+		if errors.Is(err, calculation.ErrInvalidExpression) || errors.Is(err, calculation.ErrDivisionByZero) {
+			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 		} else {
-			fmt.Fprintf(w, "unknown err")
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
 	} else {

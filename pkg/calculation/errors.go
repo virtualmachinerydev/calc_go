@@ -3,6 +3,6 @@ package calculation
 import "errors"
 
 var (
-	ErrInvalidExpression = errors.New("invalid expression")
-	ErrDivisionByZero    = errors.New("division by zero")
+	ErrInvalidExpression = errors.New("Expression is not valid")
+	ErrDivisionByZero    = errors.New("Expression is not valid")
 )
